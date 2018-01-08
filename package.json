@@ -9,16 +9,23 @@
   ],
   "main": "index.js",
   "scripts": {
-    "start": "node ./index.js"
+    "start": "node src/cli.js"
+  },
+  "bin": {
+    "schouse-tools": "src/cli.js"
   },
   "author": "Jonathon Hill <jhill9693@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "apollo-client-preset": "^1.0.6",
     "colors": "^1.1.2",
+    "config": "^1.29.1",
     "graphql": "^0.11.7",
     "graphql-tag": "^2.6.1",
+    "lodash": "^4.17.4",
     "node-fetch": "^1.7.3",
-    "rxjs": "^5.5.6"
+    "rxjs": "^5.5.6",
+    "yaml": "^0.3.0",
+    "yargs": "^10.0.3"
   }
 }
