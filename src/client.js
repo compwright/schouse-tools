@@ -7,7 +7,7 @@ module.exports = apiKey =>
   new ApolloClient({
     link: new HttpLink({
       fetch: fetch,
-      uri: "http://alpha.openstates.org/graphql",
+      uri: "https://openstates.org/graphql",
       headers: {
         "X-API-KEY": apiKey
       }
