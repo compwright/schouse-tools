@@ -9,10 +9,10 @@
   ],
   "main": "index.js",
   "scripts": {
-    "start": "node src/cli.js"
+    "start": "node src/index.js"
   },
   "bin": {
-    "schouse-tools": "src/cli.js"
+    "schouse-tools": "src/index.js"
   },
   "author": "Jonathon Hill <jhill9693@gmail.com>",
   "license": "MIT",
