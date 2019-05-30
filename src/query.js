@@ -1,8 +1,9 @@
 const Rx = require("rxjs");
+const get = require("lodash/get");
 const Observable = Rx.Observable;
 const Subscriber = Rx.Subscriber;
 
-module.exports = client => (gql, variables) => {
+module.exports = client => (gql, variables, selector = 'results') => {
   const query = client.watchQuery({ query: gql, variables });
   const query$ = Observable.from(query);
 
@@ -14,7 +15,7 @@ module.exports = client => (gql, variables) => {
   });
 
   return query$
-    .takeWhile(result => result.data.results.edges.length > 0) // trigger complete after the last page query returns no results
-    .do(result => cursor$.next(result.data.results.pageInfo.cursor)) // extract cursors here so that paging stops if query$ ends
-    .flatMap(result => result.data.results.edges); // unroll results array into individual items
+    .takeWhile(result => get(result.data, selector, {}).edges.length > 0) // trigger complete after the last page query returns no results
+    .do(result => cursor$.next(get(result.data, selector, {}).pageInfo.cursor)) // extract cursors here so that paging stops if query$ ends
+    .flatMap(result => get(result.data, selector, {}).edges); // unroll results array into individual items
 };
