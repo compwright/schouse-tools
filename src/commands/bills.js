@@ -1,47 +1,9 @@
 const config = require("config");
-const gql = require("graphql-tag");
-const pick = require("lodash").pick;
+const pick = require("lodash/pick");
 const client = require("../client")(config.get("openstates.apiKey"));
 const query = require("../query")(client);
+const queryBills = require("../queries/bills")(query);
 const subscribers = require("../subscribers");
-
-const BILLS_QUERY = gql`
-  query Bills(
-    $cursor: String
-    $since: String
-    $jurisdiction: String
-    $session: String
-  ) {
-    results: bills(
-      first: 100
-      after: $cursor
-      updatedSince: $since
-      jurisdiction: $jurisdiction
-      session: $session
-    ) {
-      pageInfo {
-        hasNextPage
-        cursor: endCursor
-      }
-      edges {
-        node {
-          bill: identifier
-          type: classification
-          title
-          session: legislativeSession {
-            identifier
-          }
-          sponsors: sponsorships {
-            name
-          }
-          sources {
-            url
-          }
-        }
-      }
-    }
-  }
-`;
 
 exports.command = "bills [options]";
 
@@ -67,14 +29,7 @@ exports.builder = {
 exports.handler = function(argv) {
   const variables = pick(argv, ["since", "jurisdiction", "session"]);
 
-  const bill$ = query(BILLS_QUERY, variables).map(edge => ({
-    bill: edge.node.bill,
-    type: edge.node.type[0],
-    title: edge.node.title,
-    session: edge.node.session.identifier,
-    sponsors: edge.node.sponsors.map(sponsor => sponsor.name).join(", "),
-    url: edge.node.sources[0].url
-  })).share();
+  const bill$ = queryBills(variables).share();
 
   if (argv.json) {
     bill$.subscribe(subscribers.jsonWriter());
