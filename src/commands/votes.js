@@ -22,6 +22,10 @@ exports.builder = {
   json: {
     boolean: true,
     description: "Stream to STDOUT in JSON format"
+  },
+  csv: {
+    boolean: true,
+    description: "Stream to STDOUT in CSV format"
   }
 };
 
@@ -40,7 +44,9 @@ exports.handler = function(argv) {
   
   vote$ = vote$.share();
 
-  if (argv.json) {
+  if (argv.csv) {
+    vote$.subscribe(subscribers.csvWriter());
+  } else if (argv.json) {
     vote$.subscribe(subscribers.jsonWriter());
   } else {
     vote$.count().subscribe(subscribers.log());

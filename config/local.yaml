@@ -1,4 +1,6 @@
 openstates:
   apiKey: "6fbda182-6f0c-4440-8df3-052d7e985937"
   jurisdiction: "South Carolina"
-  session: "2019-2020"
+  session: "2021-2022"
+webhook:
+  url: https://hooks.zapier.com/hooks/catch/148960/8rallv/

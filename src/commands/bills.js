@@ -15,14 +15,17 @@ exports.builder = {
     alias: "d",
     description: "Only bills updated after a date (YYYY-MM-DD)"
   },
-  zap: {
+  webhook: {
     boolean: true,
-    alias: "f",
-    description: "Send to Zapier"
+    description: "Send to Webhook"
   },
   json: {
     boolean: true,
     description: "Stream to STDOUT in JSON format"
+  },
+  csv: {
+    boolean: true,
+    description: "Stream to STDOUT in CSV format"
   }
 };
 
@@ -31,22 +34,20 @@ exports.handler = function(argv) {
 
   const bill$ = queryBills(variables).share();
 
-  if (argv.json) {
+  if (argv.csv) {
+    bill$.subscribe(subscribers.csvWriter());
+  } else if (argv.json) {
     bill$.subscribe(subscribers.jsonWriter());
-  }
-
-  if (argv.zap) {
+  } else if (argv.webhook) {
     bill$.bufferCount(100).subscribe(
       subscribers.post({
-        url: "https://hooks.zapier.com/hooks/catch/148960/8rallv/",
+        url: config.get('webhook.url'),
         onSuccess: () => process.stdout.write(".".green),
         onError: () => process.stdout.write(".".red),
         onFinished: () => process.stdout.write("\n")
       })
     );
-  }
-
-  if (!argv.json && !argv.zap) {
+  } else {
     bill$.count().subscribe(subscribers.log());
   }
 };

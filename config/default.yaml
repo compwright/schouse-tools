@@ -2,3 +2,5 @@ openstates:
   apiKey: "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
   jurisdiction: "South Carolina"
   session: "2017-2018"
+webhook:
+  url: https://hooks.zapier.com/hooks/catch/148960/8rallv/
