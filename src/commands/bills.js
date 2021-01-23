@@ -26,6 +26,10 @@ exports.builder = {
   csv: {
     boolean: true,
     description: "Stream to STDOUT in CSV format"
+  },
+  xml: {
+    boolean: true,
+    description: "Stream to STDOUT in XML format"
   }
 };
 
@@ -36,6 +40,8 @@ exports.handler = function(argv) {
 
   if (argv.csv) {
     bill$.subscribe(subscribers.csvWriter());
+  } else if (argv.xml) {
+    bill$.subscribe(subscribers.xmlWriter());
   } else if (argv.json) {
     bill$.subscribe(subscribers.jsonWriter());
   } else if (argv.webhook) {

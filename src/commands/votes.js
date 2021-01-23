@@ -26,6 +26,10 @@ exports.builder = {
   csv: {
     boolean: true,
     description: "Stream to STDOUT in CSV format"
+  },
+  xml: {
+    boolean: true,
+    description: "Stream to STDOUT in XML format"
   }
 };
 
@@ -46,6 +50,8 @@ exports.handler = function(argv) {
 
   if (argv.csv) {
     vote$.subscribe(subscribers.csvWriter());
+  } else if (argv.xml) {
+    vote$.subscribe(subscribers.xmlWriter());
   } else if (argv.json) {
     vote$.subscribe(subscribers.jsonWriter());
   } else {
