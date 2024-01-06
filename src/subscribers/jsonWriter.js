@@ -1,4 +1,4 @@
-const Subscriber = require('rxjs').Subscriber;
+const {Subscriber} = require('rxjs');
 
 module.exports = () => {
   var first = true;

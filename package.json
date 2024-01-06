@@ -17,17 +17,19 @@
   "author": "Jonathon Hill <jhill9693@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "apollo-client-preset": "^1.0.8",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
+    "apollo-link": "^1.2.14",
+    "apollo-link-http": "^1.5.17",
     "colors": "^1.4.0",
-    "config": "^3.3.3",
-    "csv-stringify": "^5.5.3",
-    "graphql": "^15.4.0",
-    "graphql-tag": "^2.11.0",
-    "js-yaml": "^3.14.1",
-    "jstoxml": "^2.0.3",
+    "config": "^3.3.9",
+    "csv-stringify": "^6.4.5",
+    "graphql": "^15.8.0",
+    "graphql-tag": "^2.12.6",
+    "jstoxml": "^3.2.10",
     "lodash": "^4.17.20",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.7.0",
     "rxjs": "^5.5.12",
-    "yargs": "^16.2.0"
+    "yargs": "^17.7.2"
   }
 }

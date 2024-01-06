@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
-const ApolloClient = require("apollo-client").ApolloClient;
-const HttpLink = require("apollo-link-http").HttpLink;
-const InMemoryCache = require("apollo-cache-inmemory").InMemoryCache;
+const {ApolloClient} = require("apollo-client");
+const {HttpLink} = require("apollo-link-http");
+const {InMemoryCache} = require("apollo-cache-inmemory");
 
 module.exports = apiKey =>
   new ApolloClient({

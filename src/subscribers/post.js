@@ -1,4 +1,4 @@
-const Subscriber = require("rxjs").Subscriber;
+const {Subscriber} = require("rxjs");
 const fetch = require("node-fetch");
 
 module.exports = ({ url, onSuccess, onError, onFinished }) => new Subscriber({

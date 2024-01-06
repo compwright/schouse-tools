@@ -1,5 +1,5 @@
-const stringify = require('csv-stringify/lib/sync');
-const Subscriber = require('rxjs').Subscriber;
+const {stringify} = require('csv-stringify/sync');
+const {Subscriber} = require('rxjs');
 
 module.exports = () => {
   var first = true;
